@@ -1,0 +1,46 @@
+from appium import webdriver
+from time import sleep
+
+desired_caps = {
+    "platformName": "Android11",
+    "platformVersion": "11",
+    "deviceName": "emulator-5554",
+    "appPackage": "com.ebacshop.package",
+    "appActivity": "com.ebacshop.activity",
+    "automationName": "UiAutomator2"
+}
+
+driver = webdriver.Remote("http://localhost:4723/wd/hub", desired_caps)
+sleep(5)
+
+profile_button = driver.find_element_by_android_uiautomator('new UiSelector().text("Profile")')
+profile_button.click()
+sleep(3)
+
+sign_up_button = driver.find_element_by_xpath('//android.widget.TextView[@text="Sign up"]')
+sign_up_button.click()
+sleep(3)
+
+first_name_input = driver.find_element_by_xpath('//android.widget.EditText[@resource-id="firstName"]')
+first_name_input.send_keys("gabriel")
+
+last_name_input = driver.find_element_by_xpath('//android.widget.EditText[@resource-id="lastName"]')
+last_name_input.send_keys("thiego")
+
+phone_input = driver.find_element_by_xpath('//android.widget.EditText[@resource-id="phone"]')
+phone_input.send_keys("123456789")
+
+email_input = driver.find_element_by_xpath('//android.widget.EditText[@hint="Email Address"]')
+email_input.send_keys("gabrilthiego@example.com")
+
+password_input = driver.find_element_by_xpath('//android.widget.EditText[@resource-id="password"]')
+password_input.send_keys("senha123")
+
+repassword_input = driver.find_element_by_id('repassword')
+repassword_input.send_keys("senha123")
+
+create_button = driver.find_element_by_accessibility_id("Create")
+create_button.click()
+sleep(5)
+
+driver.quit()
